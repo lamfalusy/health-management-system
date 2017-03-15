@@ -1,11 +1,10 @@
 package hu.lamsoft.hms.customer;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
-@SpringBootApplication
-@EnableDiscoveryClient
+import hu.lamsoft.hms.common.restapi.annotation.HMSApplication;
+
+@HMSApplication
 public class CustomerApplication {
 
 	public static void main(String[] args) {
