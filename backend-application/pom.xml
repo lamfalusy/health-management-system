@@ -24,6 +24,7 @@
 		<module>nutritionist</module>
 		<module>food</module>
 		<module>eureka</module>
+		<module>authentication</module>
 	</modules>
 	
 	<dependencyManagement>
