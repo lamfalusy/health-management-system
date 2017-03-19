@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import hu.lamsoft.hms.common.persistence.customer.entity.Customer;
 import hu.lamsoft.hms.common.restapi.security.jwt.AuthenticatedUser;
 import hu.lamsoft.hms.common.service.customer.CustomerService;
+import hu.lamsoft.hms.common.service.customer.vo.CustomerVO;
 
 @RestController
 public class CustomerController {
@@ -17,7 +17,7 @@ public class CustomerController {
 	private CustomerService customerService;
 	
 	@RequestMapping(value = "/secured/customer", method = RequestMethod.GET)
-    public Customer getCustomerProfile() {
+    public CustomerVO getCustomerProfile() {
 		AuthenticatedUser authenticatedUser = (AuthenticatedUser) SecurityContextHolder.getContext().getAuthentication();
         return customerService.getCustomer(authenticatedUser.getName());
     }

@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import hu.lamsoft.hms.common.persistence.food.entity.Food;
-import hu.lamsoft.hms.common.restapi.security.jwt.AuthenticatedUser;
 import hu.lamsoft.hms.common.service.food.FoodService;
+import hu.lamsoft.hms.common.service.food.vo.FoodVO;
 
 @RestController
 public class FoodController {
@@ -18,7 +17,7 @@ public class FoodController {
 	private FoodService foodService;
 	
 	@RequestMapping(value = "/foods", method = RequestMethod.GET)
-    public List<Food> getFoods(AuthenticatedUser authentication) {
+    public List<FoodVO> getFoods() {
         return foodService.searchFood(null);
     }
 	

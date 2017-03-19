@@ -3,23 +3,24 @@ package hu.lamsoft.hms.common.service.customer;
 import java.util.Date;
 import java.util.List;
 
-import hu.lamsoft.hms.common.persistence.customer.entity.Customer;
-import hu.lamsoft.hms.common.persistence.customer.entity.CustomerHistoricalData;
-import hu.lamsoft.hms.common.persistence.customer.entity.CustomerHistoricalDataValue;
-import hu.lamsoft.hms.common.persistence.customer.entity.CustomerMeal;
+import hu.lamsoft.hms.common.service.customer.vo.CustomerHistoricalDataVO;
+import hu.lamsoft.hms.common.service.customer.vo.CustomerHistoricalDataValueVO;
+import hu.lamsoft.hms.common.service.customer.vo.CustomerMealVO;
+import hu.lamsoft.hms.common.service.customer.vo.CustomerRegistrationVO;
+import hu.lamsoft.hms.common.service.customer.vo.CustomerVO;
 
 public interface CustomerService {
 
-	Customer registrate(Customer customer);
+	CustomerVO registrate(CustomerRegistrationVO customer);
 	
-	Customer getCustomer(String email);
+	CustomerVO getCustomer(String email);
 	
-	CustomerHistoricalDataValue recordHistoricalData(CustomerHistoricalDataValue historicalDataValue);
+	CustomerHistoricalDataValueVO recordHistoricalData(CustomerHistoricalDataValueVO historicalDataValue);
 	
-	CustomerMeal recordCustomerMeal(CustomerMeal customerMeal);
+	CustomerMealVO recordCustomerMeal(CustomerMealVO customerMeal);
 	
-	List<CustomerHistoricalDataValue> getHistoricalData(Customer customer, CustomerHistoricalData historicalData, Date fromDate, Date toDate);
+	List<CustomerHistoricalDataValueVO> getHistoricalData(CustomerVO customer, CustomerHistoricalDataVO historicalData, Date fromDate, Date toDate);
 	
-	List<CustomerMeal> getCustomerMeal(Customer customer, Date fromDate, Date toDate);
+	List<CustomerMealVO> getCustomerMeal(CustomerVO customer, Date fromDate, Date toDate);
 	
 }

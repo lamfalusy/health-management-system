@@ -48,6 +48,12 @@
 				<artifactId>common-rest-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			
+			<dependency>
+			    <groupId>org.modelmapper</groupId>
+			    <artifactId>modelmapper</artifactId>
+			    <version>0.7.7</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	

@@ -2,17 +2,17 @@ package hu.lamsoft.hms.common.service.nutritionist;
 
 import java.util.List;
 
-import hu.lamsoft.hms.common.persistence.nutritionist.entity.BlogEntry;
-import hu.lamsoft.hms.common.persistence.nutritionist.entity.Nutritionist;
 import hu.lamsoft.hms.common.service.nutritionist.vo.BlogEntrySearchVO;
+import hu.lamsoft.hms.common.service.nutritionist.vo.BlogEntryVO;
 import hu.lamsoft.hms.common.service.nutritionist.vo.NutritionistSearchVO;
+import hu.lamsoft.hms.common.service.nutritionist.vo.NutritionistVO;
 
 public interface NutritionistService {
 
-	Nutritionist registrate(Nutritionist nutritionist);
+	NutritionistVO registrate(NutritionistVO nutritionist);
 	
-	List<Nutritionist> searchNutritionist(NutritionistSearchVO nutritionistSearchVO);
+	List<NutritionistVO> searchNutritionist(NutritionistSearchVO nutritionistSearchVO);
 	
-	List<BlogEntry> searchBlogEntry(BlogEntrySearchVO blogEntrySearchVO);
+	List<BlogEntryVO> searchBlogEntry(BlogEntrySearchVO blogEntrySearchVO);
 	
 }

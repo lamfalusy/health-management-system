@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import hu.lamsoft.hms.common.persistence.customer.entity.Customer;
 import hu.lamsoft.hms.common.service.customer.CustomerService;
+import hu.lamsoft.hms.common.service.customer.vo.CustomerRegistrationVO;
+import hu.lamsoft.hms.common.service.customer.vo.CustomerVO;
 
 @RestController("/registrate")
 public class RegistrateController {
@@ -16,7 +17,7 @@ public class RegistrateController {
 	private CustomerService customerService;
 	
 	@RequestMapping(method = RequestMethod.POST)
-    public Customer registrate(@RequestBody Customer customer) {
+    public CustomerVO registrate(@RequestBody CustomerRegistrationVO customer) {
         return customerService.registrate(customer);
     }
 	
