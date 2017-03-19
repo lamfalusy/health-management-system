@@ -3,6 +3,7 @@ package hu.lamsoft.hms.common.service.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import hu.lamsoft.hms.common.persistence.entity.BaseEntity;
@@ -27,6 +28,10 @@ public class ModelMapper {
 	
 	public <T extends BaseEntity, S extends BaseVO> List<T> convertToEntity(List<S> vos, Class<T> targetClass) {
 		return vos.stream().map(vo -> convertToEntity(vo, targetClass)).collect(Collectors.toList());
+	}
+	
+	public <T extends BaseVO, S extends BaseEntity> Page<T> convertToVO(Page<S> entities, Class<T> targetClass) {
+		return entities.map(entity -> convertToVO(entity, targetClass));
 	}
 	
 }

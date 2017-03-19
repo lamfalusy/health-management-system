@@ -1,10 +1,9 @@
 package hu.lamsoft.hms.common.service.food.impl;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import hu.lamsoft.hms.common.persistence.food.dao.FoodDao;
@@ -26,12 +25,12 @@ public class FoodServiceImpl implements FoodService {
 	private ModelMapper modelMapper;
 	
 	@Override
-	public List<FoodVO> searchFood(FoodSearchVO foodSearchVO) {
-		return modelMapper.convertToVO(foodDao.findAll(), FoodVO.class);
+	public Page<FoodVO> searchFood(FoodSearchVO foodSearchVO) {
+		return modelMapper.convertToVO(foodDao.findAll(foodSearchVO), FoodVO.class);
 	}
 
 	@Override
-	public List<RecipeVO> searchRecipe(RecipeSearchVO recipeSearchVO) {
+	public Page<RecipeVO> searchRecipe(RecipeSearchVO recipeSearchVO) {
 		// TODO Auto-generated method stub
 		return null;
 	}
