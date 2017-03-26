@@ -12,6 +12,8 @@
 		<testng.version>6.10</testng.version>
 		<lombok.version>1.16.8</lombok.version>
 		<commons.lang3.version>3.0</commons.lang3.version>
+		<modelmapper.version>0.7.7</modelmapper.version>
+		<querydsl.version>3.6.0</querydsl.version>
 	</properties>
 	
 	<parent>
@@ -52,7 +54,25 @@
 			<dependency>
 			    <groupId>org.modelmapper</groupId>
 			    <artifactId>modelmapper</artifactId>
-			    <version>0.7.7</version>
+			    <version>${modelmapper.version}</version>
+			</dependency>
+			
+			<dependency> 
+			    <groupId>com.mysema.querydsl</groupId> 
+			    <artifactId>querydsl-core</artifactId> 
+			    <version>${querydsl.version}</version>
+			</dependency>
+			 
+			<dependency> 
+			    <groupId>com.mysema.querydsl</groupId> 
+			    <artifactId>querydsl-apt</artifactId> 
+			    <version>${querydsl.version}</version>
+			</dependency>
+			
+			<dependency> 
+			    <groupId>com.mysema.querydsl</groupId> 
+			    <artifactId>querydsl-jpa</artifactId> 
+			    <version>${querydsl.version}</version> 
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -95,5 +115,31 @@
 		    <version>${commons.lang3.version}</version>
 		</dependency>
     </dependencies>
+	
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+				    <groupId>com.mysema.maven</groupId>
+				    <artifactId>apt-maven-plugin</artifactId>
+				    <executions>
+				        <execution>
+				            <goals>
+				                <goal>process</goal>
+				            </goals>
+				            <configuration>
+				                <outputDirectory>target/generated-sources/java</outputDirectory>
+				                <processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
+				            </configuration>
+				        </execution>
+				    </executions>
+				</plugin>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 	
 </project>

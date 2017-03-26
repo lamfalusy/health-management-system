@@ -13,6 +13,7 @@ import hu.lamsoft.hms.common.service.food.vo.FoodVO;
 import hu.lamsoft.hms.common.service.food.vo.RecipeSearchVO;
 import hu.lamsoft.hms.common.service.food.vo.RecipeVO;
 import hu.lamsoft.hms.common.service.mapper.ModelMapper;
+import hu.lamsoft.hms.common.service.search.impl.SearchPredicateBuilderComponent;
 
 @Service
 @Transactional
@@ -24,9 +25,12 @@ public class FoodServiceImpl implements FoodService {
 	@Autowired
 	private ModelMapper modelMapper;
 	
+	@Autowired
+	private SearchPredicateBuilderComponent searchPredicateBuilderComponent;
+	
 	@Override
 	public Page<FoodVO> searchFood(FoodSearchVO foodSearchVO) {
-		return modelMapper.convertToVO(foodDao.findAll(foodSearchVO), FoodVO.class);
+		return modelMapper.convertToVO(foodDao.findAll(searchPredicateBuilderComponent.build(foodSearchVO, FoodSearchVO.class), foodSearchVO), FoodVO.class);
 	}
 
 	@Override
