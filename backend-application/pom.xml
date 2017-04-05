@@ -29,6 +29,7 @@
 		<module>nutritionist</module>
 		<module>food</module>
 		<module>eureka</module>
+		<module>zuul</module>
 	</modules>
 	
 	<dependencyManagement>
