@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import hu.lamsoft.hms.common.persistence.food.dao.FoodDao;
+import hu.lamsoft.hms.common.persistence.recipe.dao.RecipeDao;
 import hu.lamsoft.hms.common.service.food.FoodService;
 import hu.lamsoft.hms.common.service.food.vo.FoodSearchVO;
 import hu.lamsoft.hms.common.service.food.vo.FoodVO;
@@ -23,6 +24,9 @@ public class FoodServiceImpl implements FoodService {
 	private FoodDao foodDao;
 	
 	@Autowired
+	private RecipeDao recipeDao;
+	
+	@Autowired
 	private ModelMapper modelMapper;
 	
 	@Autowired
@@ -35,8 +39,7 @@ public class FoodServiceImpl implements FoodService {
 
 	@Override
 	public Page<RecipeVO> searchRecipe(RecipeSearchVO recipeSearchVO) {
-		// TODO Auto-generated method stub
-		return null;
+		return modelMapper.convertToVO(recipeDao.findAll(searchPredicateBuilderComponent.build(recipeSearchVO, RecipeSearchVO.class), recipeSearchVO), RecipeVO.class);
 	}
 
 }

@@ -1,7 +1,6 @@
 package hu.lamsoft.hms.common.service.food.vo;
 
-import hu.lamsoft.hms.common.persistence.recipe.entity.Recipe;
-import hu.lamsoft.hms.common.persistence.unit.entity.Quantity;
+import hu.lamsoft.hms.common.service.unit.vo.QuantityVO;
 import hu.lamsoft.hms.common.service.vo.BaseVO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,20 +10,20 @@ import lombok.EqualsAndHashCode;
 public class FoodVO extends BaseVO {
 
     private String name;
-    private Quantity energyInKcal;
-    private Quantity energyInKj;
-    private Quantity waterInG;
-    private Quantity proteinInG;
-    private Quantity carbohydratesInG;
-    private Quantity sugarInG;
-    private Quantity fatInG;
-    private Quantity saturatedFatInG;
-    private Quantity monounsaturatedFatInG;
-    private Quantity polyunsaturatedFatInG;
-    private Quantity cholesterolInMg;
-    private Quantity fiberInG;
-    private Quantity emotional;
-    private Quantity healthy;
-    private Recipe recipe;
+    private QuantityVO energyInKcal;
+    private QuantityVO energyInKj;
+    private QuantityVO waterInG;
+    private QuantityVO proteinInG;
+    private QuantityVO carbohydratesInG;
+    private QuantityVO sugarInG;
+    private QuantityVO fatInG;
+    private QuantityVO saturatedFatInG;
+    private QuantityVO monounsaturatedFatInG;
+    private QuantityVO polyunsaturatedFatInG;
+    private QuantityVO cholesterolInMg;
+    private QuantityVO fiberInG;
+    private QuantityVO emotional;
+    private QuantityVO healthy;
+    private RecipeVO recipe;
     
 }

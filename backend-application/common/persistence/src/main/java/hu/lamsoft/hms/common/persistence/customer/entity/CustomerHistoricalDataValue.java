@@ -3,6 +3,7 @@ package hu.lamsoft.hms.common.persistence.customer.entity;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
@@ -15,7 +16,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=true)
 public class CustomerHistoricalDataValue extends BaseEntity {
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "customer_fk")
 	private Customer customer;
 	@OneToOne
