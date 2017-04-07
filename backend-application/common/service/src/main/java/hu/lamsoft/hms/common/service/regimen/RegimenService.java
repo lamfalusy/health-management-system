@@ -1,5 +1,7 @@
 package hu.lamsoft.hms.common.service.regimen;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 
 import hu.lamsoft.hms.common.service.customer.vo.CustomerVO;
@@ -13,6 +15,8 @@ public interface RegimenService {
 	
 	RegimenForCustomerVO assignRegimenToCustomer(RegimenVO regimen, CustomerVO customer);
 	
-	RegimenForCustomerVO unAssignRegimenToCustomer(RegimenForCustomerVO regimenForCustomer);
+	RegimenForCustomerVO unAssignRegimenToCustomer(RegimenForCustomerVO regimenForCustomer, CustomerVO customer);
+	
+	List<RegimenForCustomerVO> getRegimenForCustomer(String email);
 	
 }

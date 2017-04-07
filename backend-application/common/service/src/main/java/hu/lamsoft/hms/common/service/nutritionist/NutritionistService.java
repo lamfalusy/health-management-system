@@ -1,6 +1,6 @@
 package hu.lamsoft.hms.common.service.nutritionist;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 import hu.lamsoft.hms.common.service.nutritionist.vo.BlogEntrySearchVO;
 import hu.lamsoft.hms.common.service.nutritionist.vo.BlogEntryVO;
@@ -11,8 +11,8 @@ public interface NutritionistService {
 
 	NutritionistVO registrate(NutritionistVO nutritionist);
 	
-	List<NutritionistVO> searchNutritionist(NutritionistSearchVO nutritionistSearchVO);
+	Page<NutritionistVO> searchNutritionist(NutritionistSearchVO nutritionistSearchVO);
 	
-	List<BlogEntryVO> searchBlogEntry(BlogEntrySearchVO blogEntrySearchVO);
+	Page<BlogEntryVO> searchBlogEntry(BlogEntrySearchVO blogEntrySearchVO);
 	
 }

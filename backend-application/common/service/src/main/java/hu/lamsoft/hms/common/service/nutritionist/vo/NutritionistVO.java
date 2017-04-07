@@ -1,6 +1,6 @@
 package hu.lamsoft.hms.common.service.nutritionist.vo;
 
-import hu.lamsoft.hms.common.persistence.customer.entity.Customer;
+import hu.lamsoft.hms.common.service.customer.vo.CustomerVO;
 import hu.lamsoft.hms.common.service.vo.BaseVO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=true)
 public class NutritionistVO extends BaseVO {
 
-	private Customer customer;
+	private CustomerVO customer;
 	private String introduction;
 	
 }
