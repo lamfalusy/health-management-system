@@ -17,7 +17,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>hu.lamsoft.hms</groupId>
-			<artifactId>common-service</artifactId>
+			<artifactId>food-service</artifactId>
 		</dependency>
 		
 		<dependency>

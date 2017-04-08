@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import hu.lamsoft.hms.common.restapi.security.jwt.AuthenticatedUser;
-import hu.lamsoft.hms.common.service.customer.CustomerService;
 import hu.lamsoft.hms.common.service.customer.dto.CustomerDTO;
+import hu.lamsoft.hms.customer.service.customer.CustomerService;
 
 @RestController
 @RequestMapping("/secured")

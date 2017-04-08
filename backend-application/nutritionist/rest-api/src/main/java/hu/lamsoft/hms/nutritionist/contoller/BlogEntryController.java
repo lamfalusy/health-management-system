@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import hu.lamsoft.hms.common.service.nutritionist.BlogEntryService;
-import hu.lamsoft.hms.common.service.nutritionist.dto.BlogEntryDTO;
-import hu.lamsoft.hms.common.service.nutritionist.vo.BlogEntrySearchVO;
+import hu.lamsoft.hms.nutritionist.service.nutritionist.BlogEntryService;
+import hu.lamsoft.hms.nutritionist.service.nutritionist.dto.BlogEntryDTO;
+import hu.lamsoft.hms.nutritionist.service.nutritionist.vo.BlogEntrySearchVO;
 
 @RestController
 public class BlogEntryController {

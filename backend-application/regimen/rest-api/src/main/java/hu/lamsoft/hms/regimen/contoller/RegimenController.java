@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import hu.lamsoft.hms.common.service.regimen.RegimenService;
-import hu.lamsoft.hms.common.service.regimen.dto.RegimenDTO;
-import hu.lamsoft.hms.common.service.regimen.vo.RegimenSearchVO;
+import hu.lamsoft.hms.regimen.service.regimen.RegimenService;
+import hu.lamsoft.hms.regimen.service.regimen.dto.RegimenDTO;
+import hu.lamsoft.hms.regimen.service.regimen.vo.RegimenSearchVO;
 
 @RestController
 public class RegimenController {

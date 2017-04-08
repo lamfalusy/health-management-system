@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import hu.lamsoft.hms.common.service.customer.CustomerService;
 import hu.lamsoft.hms.common.service.customer.dto.CustomerDTO;
-import hu.lamsoft.hms.common.service.customer.vo.CustomerRegistrationVO;
+import hu.lamsoft.hms.customer.service.customer.CustomerService;
+import hu.lamsoft.hms.customer.service.customer.vo.CustomerRegistrationVO;
 
 @RestController
 public class RegistrateController {

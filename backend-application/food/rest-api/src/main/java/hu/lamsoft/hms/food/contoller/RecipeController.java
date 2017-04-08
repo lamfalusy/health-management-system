@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import hu.lamsoft.hms.common.service.food.RecipeService;
 import hu.lamsoft.hms.common.service.food.dto.RecipeDTO;
-import hu.lamsoft.hms.common.service.food.vo.RecipeSearchVO;
+import hu.lamsoft.hms.food.service.food.RecipeService;
+import hu.lamsoft.hms.food.service.food.vo.RecipeSearchVO;
 
 @RestController
 public class RecipeController {

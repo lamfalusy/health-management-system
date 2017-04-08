@@ -18,6 +18,7 @@
 		<modelmapper.version>0.7.7</modelmapper.version>
 		<querydsl.version>3.6.0</querydsl.version>
 		<jjwt.version>0.7.0</jjwt.version>
+		<reflections.version>0.9.10</reflections.version>
 	</properties>
 	
 	<parent>
@@ -57,6 +58,54 @@
 			</dependency>
 			
 			<dependency>
+				<groupId>hu.lamsoft.hms</groupId>
+				<artifactId>customer-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>hu.lamsoft.hms</groupId>
+				<artifactId>customer-persistence</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>hu.lamsoft.hms</groupId>
+				<artifactId>food-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>hu.lamsoft.hms</groupId>
+				<artifactId>food-persistence</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>hu.lamsoft.hms</groupId>
+				<artifactId>nutritionist-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>hu.lamsoft.hms</groupId>
+				<artifactId>nutritionist-persistence</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>hu.lamsoft.hms</groupId>
+				<artifactId>regimen-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>hu.lamsoft.hms</groupId>
+				<artifactId>regimen-persistence</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
 			    <groupId>org.modelmapper</groupId>
 			    <artifactId>modelmapper</artifactId>
 			    <version>${modelmapper.version}</version>
@@ -84,6 +133,12 @@
 			    <groupId>io.jsonwebtoken</groupId>
 			    <artifactId>jjwt</artifactId>
 			    <version>${jjwt.version}</version>
+			</dependency>
+			
+			<dependency>
+			    <groupId>org.reflections</groupId>
+			    <artifactId>reflections</artifactId>
+			    <version>${reflections.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

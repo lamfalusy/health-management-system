@@ -6,11 +6,11 @@ import java.util.Map;
 import hu.lamsoft.hms.common.service.search.SearchPredicateBuilder;
 import hu.lamsoft.hms.common.service.search.vo.BaseSearchVO;
 
-public class SearchPredicateBuilderMap {
+class SearchPredicateBuilderMap {
 
 	private Map<Class<? extends BaseSearchVO>, SearchPredicateBuilder<? extends BaseSearchVO>> map = new HashMap<>();
 	
-	public SearchPredicateBuilderMap() {
+	SearchPredicateBuilderMap() {
 		// Nothing to do here
 	}
 	

@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import hu.lamsoft.hms.common.restapi.security.jwt.AuthenticatedUser;
-import hu.lamsoft.hms.common.service.customer.CustomerHistoricalDataService;
-import hu.lamsoft.hms.common.service.customer.CustomerService;
-import hu.lamsoft.hms.common.service.customer.dto.CustomerHistoricalDataDTO;
-import hu.lamsoft.hms.common.service.customer.dto.CustomerHistoricalDataValueDTO;
+import hu.lamsoft.hms.customer.service.customer.CustomerHistoricalDataService;
+import hu.lamsoft.hms.customer.service.customer.CustomerService;
+import hu.lamsoft.hms.customer.service.customer.dto.CustomerHistoricalDataDTO;
+import hu.lamsoft.hms.customer.service.customer.dto.CustomerHistoricalDataValueDTO;
 
 @RestController
 @RequestMapping("/secured")

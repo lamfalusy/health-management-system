@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import hu.lamsoft.hms.common.restapi.restservice.CustomerRestService;
 import hu.lamsoft.hms.common.restapi.security.jwt.AuthenticatedUser;
-import hu.lamsoft.hms.common.service.customer.CustomerService;
-import hu.lamsoft.hms.common.service.nutritionist.NutritionistService;
 import hu.lamsoft.hms.common.service.nutritionist.dto.NutritionistDTO;
-import hu.lamsoft.hms.common.service.nutritionist.vo.NutritionistSearchVO;
+import hu.lamsoft.hms.nutritionist.service.nutritionist.NutritionistService;
+import hu.lamsoft.hms.nutritionist.service.nutritionist.vo.NutritionistSearchVO;
 
 @RestController
 public class NutritionistController {
@@ -22,7 +22,7 @@ public class NutritionistController {
 	private NutritionistService nutritionistService;
 	
 	@Autowired
-	private CustomerService customerService;
+	private CustomerRestService customerRestService;
 	
 	@RequestMapping(value = "/nutritionists", method = RequestMethod.GET)
     public Page<NutritionistDTO> getNutritionists(@RequestParam(name = "page", required = false, defaultValue = "0") int page,
@@ -35,10 +35,10 @@ public class NutritionistController {
         return nutritionistService.searchNutritionist(nutritionistSearchVO);
     }
 	
-	@RequestMapping(value = "/nutritionist", method = RequestMethod.POST)
+	@RequestMapping(value = "/secured/nutritionist", method = RequestMethod.POST)
     public NutritionistDTO postNutritionist(@RequestBody NutritionistDTO nutritionist) {
 		AuthenticatedUser authenticatedUser = (AuthenticatedUser) SecurityContextHolder.getContext().getAuthentication();
-		nutritionist.setCustomer(customerService.getCustomer(authenticatedUser.getName()));
+		nutritionist.setCustomer(customerRestService.getCustomer(authenticatedUser.getName()));
 		return nutritionistService.registrate(nutritionist);
     }
 	

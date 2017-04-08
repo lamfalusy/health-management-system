@@ -17,7 +17,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>hu.lamsoft.hms</groupId>
-			<artifactId>common-service</artifactId>
+			<artifactId>regimen-service</artifactId>
 		</dependency>
 		
 		<dependency>

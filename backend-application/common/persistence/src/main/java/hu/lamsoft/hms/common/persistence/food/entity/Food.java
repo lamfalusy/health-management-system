@@ -5,7 +5,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import hu.lamsoft.hms.common.persistence.entity.BaseEntity;
-import hu.lamsoft.hms.common.persistence.recipe.entity.Recipe;
 import hu.lamsoft.hms.common.persistence.unit.entity.Quantity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
