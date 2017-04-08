@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import hu.lamsoft.hms.common.restapi.security.jwt.AuthenticatedUser;
 import hu.lamsoft.hms.common.service.customer.CustomerService;
 import hu.lamsoft.hms.common.service.nutritionist.NutritionistService;
-import hu.lamsoft.hms.common.service.nutritionist.vo.BlogEntrySearchVO;
-import hu.lamsoft.hms.common.service.nutritionist.vo.BlogEntryVO;
 import hu.lamsoft.hms.common.service.nutritionist.vo.NutritionistSearchVO;
 import hu.lamsoft.hms.common.service.nutritionist.vo.NutritionistVO;
 
@@ -35,17 +33,6 @@ public class NutritionistController {
 	@RequestMapping(value = "/nutritionists", method = RequestMethod.POST)
     public Page<NutritionistVO> getNutritionists(@RequestBody NutritionistSearchVO nutritionistSearchVO) {
         return nutritionistService.searchNutritionist(nutritionistSearchVO);
-    }
-	
-	@RequestMapping(value = "/blog-entries", method = RequestMethod.GET)
-    public Page<BlogEntryVO> getBlogEntries(@RequestParam(name = "page", required = false, defaultValue = "0") int page,
-    		@RequestParam(name = "size", required = false, defaultValue = "10") int size) {
-        return nutritionistService.searchBlogEntry(new BlogEntrySearchVO(page, size));
-    }
-	
-	@RequestMapping(value = "/blog-entries", method = RequestMethod.POST)
-    public Page<BlogEntryVO> getBlogEntries(@RequestBody BlogEntrySearchVO blogEntrySearchVO) {
-        return nutritionistService.searchBlogEntry(blogEntrySearchVO);
     }
 	
 	@RequestMapping(value = "/nutritionist", method = RequestMethod.POST)

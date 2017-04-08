@@ -8,13 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import hu.lamsoft.hms.common.persistence.customer.dao.CustomerDao;
-import hu.lamsoft.hms.common.persistence.nutritionist.dao.BlogEntryDao;
 import hu.lamsoft.hms.common.persistence.nutritionist.dao.NutritionistDao;
 import hu.lamsoft.hms.common.persistence.nutritionist.entity.Nutritionist;
 import hu.lamsoft.hms.common.service.mapper.ModelMapper;
 import hu.lamsoft.hms.common.service.nutritionist.NutritionistService;
-import hu.lamsoft.hms.common.service.nutritionist.vo.BlogEntrySearchVO;
-import hu.lamsoft.hms.common.service.nutritionist.vo.BlogEntryVO;
 import hu.lamsoft.hms.common.service.nutritionist.vo.NutritionistSearchVO;
 import hu.lamsoft.hms.common.service.nutritionist.vo.NutritionistVO;
 import hu.lamsoft.hms.common.service.search.impl.SearchPredicateBuilderComponent;
@@ -25,9 +22,6 @@ public class NutritionistServiceImpl implements NutritionistService {
 
 	@Autowired
 	private NutritionistDao nutritionistDao;
-	
-	@Autowired
-	private BlogEntryDao blogEntryDao;
 	
 	@Autowired
 	private CustomerDao customerDao;
@@ -52,11 +46,6 @@ public class NutritionistServiceImpl implements NutritionistService {
 	@Override
 	public Page<NutritionistVO> searchNutritionist(NutritionistSearchVO nutritionistSearchVO) {
 		return modelMapper.convertToVO(nutritionistDao.findAll(searchPredicateBuilderComponent.build(nutritionistSearchVO, NutritionistSearchVO.class), nutritionistSearchVO), NutritionistVO.class);
-	}
-
-	@Override
-	public Page<BlogEntryVO> searchBlogEntry(BlogEntrySearchVO blogEntrySearchVO) {
-		return modelMapper.convertToVO(blogEntryDao.findAll(searchPredicateBuilderComponent.build(blogEntrySearchVO, BlogEntrySearchVO.class), blogEntrySearchVO), BlogEntryVO.class);
 	}
 
 }

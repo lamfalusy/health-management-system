@@ -10,13 +10,13 @@ import hu.lamsoft.hms.common.service.customer.CustomerService;
 import hu.lamsoft.hms.common.service.customer.vo.CustomerRegistrationVO;
 import hu.lamsoft.hms.common.service.customer.vo.CustomerVO;
 
-@RestController("/registrate")
+@RestController
 public class RegistrateController {
 
 	@Autowired
 	private CustomerService customerService;
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value = "/registrate", method = RequestMethod.POST)
     public CustomerVO registrate(@RequestBody CustomerRegistrationVO customer) {
         return customerService.registrate(customer);
     }

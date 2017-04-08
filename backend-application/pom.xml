@@ -9,11 +9,15 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<skipITs>true</skipITs>
 		<testng.version>6.10</testng.version>
 		<lombok.version>1.16.8</lombok.version>
 		<commons.lang3.version>3.0</commons.lang3.version>
 		<modelmapper.version>0.7.7</modelmapper.version>
 		<querydsl.version>3.6.0</querydsl.version>
+		<jjwt.version>0.7.0</jjwt.version>
 	</properties>
 	
 	<parent>
@@ -75,6 +79,12 @@
 			    <artifactId>querydsl-jpa</artifactId> 
 			    <version>${querydsl.version}</version> 
 			</dependency>
+			
+			<dependency>
+			    <groupId>io.jsonwebtoken</groupId>
+			    <artifactId>jjwt</artifactId>
+			    <version>${jjwt.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	
@@ -117,6 +127,15 @@
 		</dependency>
     </dependencies>
 	
+	<profiles>
+        <profile>
+            <id>integration</id>
+            <properties>
+                <skipITs>false</skipITs>
+            </properties>
+        </profile>
+	</profiles>
+	
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -141,6 +160,34 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
+		<plugins>
+			<plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-surefire-plugin</artifactId>
+	            <configuration>
+	                <excludes>
+	                    <exclude>**/*IT.java</exclude>
+	                </excludes>
+	            </configuration>
+			</plugin>
+			<plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <skip>${skipITs}</skip>
+                    <includes>
+                        <include>**/*IT.java</include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+		</plugins>
 	</build>
 	
 </project>
