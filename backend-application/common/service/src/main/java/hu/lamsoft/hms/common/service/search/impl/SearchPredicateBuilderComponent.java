@@ -6,15 +6,15 @@ import org.springframework.stereotype.Component;
 
 import com.mysema.query.types.Predicate;
 
-import hu.lamsoft.hms.common.service.food.impl.FoodSearchPredicateBuilder;
-import hu.lamsoft.hms.common.service.food.impl.RecipeSearchPredicateBuilder;
+import hu.lamsoft.hms.common.service.food.predicate.FoodSearchPredicateBuilder;
+import hu.lamsoft.hms.common.service.food.predicate.RecipeSearchPredicateBuilder;
 import hu.lamsoft.hms.common.service.food.vo.FoodSearchVO;
 import hu.lamsoft.hms.common.service.food.vo.RecipeSearchVO;
-import hu.lamsoft.hms.common.service.nutritionist.impl.BlogEntrySearchPredicateBuilder;
-import hu.lamsoft.hms.common.service.nutritionist.impl.NutritionistSearchPredicateBuilder;
+import hu.lamsoft.hms.common.service.nutritionist.predicate.BlogEntrySearchPredicateBuilder;
+import hu.lamsoft.hms.common.service.nutritionist.predicate.NutritionistSearchPredicateBuilder;
 import hu.lamsoft.hms.common.service.nutritionist.vo.BlogEntrySearchVO;
 import hu.lamsoft.hms.common.service.nutritionist.vo.NutritionistSearchVO;
-import hu.lamsoft.hms.common.service.regimen.impl.RegimenSearchPredicateBuilder;
+import hu.lamsoft.hms.common.service.regimen.predicate.RegimenSearchPredicateBuilder;
 import hu.lamsoft.hms.common.service.regimen.vo.RegimenSearchVO;
 import hu.lamsoft.hms.common.service.search.vo.BaseSearchVO;
 

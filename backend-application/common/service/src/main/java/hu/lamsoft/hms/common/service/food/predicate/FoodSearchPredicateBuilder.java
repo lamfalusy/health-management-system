@@ -1,4 +1,4 @@
-package hu.lamsoft.hms.common.service.food.impl;
+package hu.lamsoft.hms.common.service.food.predicate;
 
 import com.mysema.query.BooleanBuilder;
 import com.mysema.query.types.Predicate;

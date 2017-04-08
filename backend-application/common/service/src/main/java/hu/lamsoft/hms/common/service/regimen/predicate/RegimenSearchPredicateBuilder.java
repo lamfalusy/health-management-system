@@ -1,4 +1,4 @@
-package hu.lamsoft.hms.common.service.regimen.impl;
+package hu.lamsoft.hms.common.service.regimen.predicate;
 
 import com.mysema.query.BooleanBuilder;
 import com.mysema.query.types.Predicate;
