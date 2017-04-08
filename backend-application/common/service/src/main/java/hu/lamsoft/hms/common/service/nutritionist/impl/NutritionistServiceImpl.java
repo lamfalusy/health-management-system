@@ -12,8 +12,8 @@ import hu.lamsoft.hms.common.persistence.nutritionist.dao.NutritionistDao;
 import hu.lamsoft.hms.common.persistence.nutritionist.entity.Nutritionist;
 import hu.lamsoft.hms.common.service.mapper.ModelMapper;
 import hu.lamsoft.hms.common.service.nutritionist.NutritionistService;
+import hu.lamsoft.hms.common.service.nutritionist.dto.NutritionistDTO;
 import hu.lamsoft.hms.common.service.nutritionist.vo.NutritionistSearchVO;
-import hu.lamsoft.hms.common.service.nutritionist.vo.NutritionistVO;
 import hu.lamsoft.hms.common.service.search.impl.SearchPredicateBuilderComponent;
 
 @Service
@@ -33,19 +33,19 @@ public class NutritionistServiceImpl implements NutritionistService {
 	private SearchPredicateBuilderComponent searchPredicateBuilderComponent;
 	
 	@Override
-	public NutritionistVO registrate(NutritionistVO nutritionist) {
+	public NutritionistDTO registrate(NutritionistDTO nutritionist) {
 		Assert.notNull(nutritionist);
 		Assert.notNull(nutritionist.getCustomer());
 		Assert.notNull(nutritionist.getCustomer().getId());
 		Nutritionist entity = new Nutritionist();
 		entity.setIntroduction(nutritionist.getIntroduction());
 		entity.setCustomer(customerDao.findOne(nutritionist.getCustomer().getId()));
-		return modelMapper.convertToVO(nutritionistDao.save(entity), NutritionistVO.class);
+		return modelMapper.convertToDTO(nutritionistDao.save(entity), NutritionistDTO.class);
 	}
 
 	@Override
-	public Page<NutritionistVO> searchNutritionist(NutritionistSearchVO nutritionistSearchVO) {
-		return modelMapper.convertToVO(nutritionistDao.findAll(searchPredicateBuilderComponent.build(nutritionistSearchVO, NutritionistSearchVO.class), nutritionistSearchVO), NutritionistVO.class);
+	public Page<NutritionistDTO> searchNutritionist(NutritionistSearchVO nutritionistSearchVO) {
+		return modelMapper.convertToDTO(nutritionistDao.findAll(searchPredicateBuilderComponent.build(nutritionistSearchVO, NutritionistSearchVO.class), nutritionistSearchVO), NutritionistDTO.class);
 	}
 
 }

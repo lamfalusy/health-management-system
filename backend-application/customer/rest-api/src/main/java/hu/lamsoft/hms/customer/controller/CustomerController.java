@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import hu.lamsoft.hms.common.restapi.security.jwt.AuthenticatedUser;
 import hu.lamsoft.hms.common.service.customer.CustomerService;
-import hu.lamsoft.hms.common.service.customer.vo.CustomerVO;
+import hu.lamsoft.hms.common.service.customer.dto.CustomerDTO;
 
 @RestController
 @RequestMapping("/secured")
@@ -18,7 +18,7 @@ public class CustomerController {
 	private CustomerService customerService;
 	
 	@RequestMapping(value = "/customer", method = RequestMethod.GET)
-    public CustomerVO getCustomerProfile() {
+    public CustomerDTO getCustomerProfile() {
 		AuthenticatedUser authenticatedUser = (AuthenticatedUser) SecurityContextHolder.getContext().getAuthentication();
         return customerService.getCustomer(authenticatedUser.getName());
     }

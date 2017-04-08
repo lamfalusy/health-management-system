@@ -2,16 +2,16 @@ package hu.lamsoft.hms.common.service.regimen;
 
 import java.util.List;
 
-import hu.lamsoft.hms.common.service.customer.vo.CustomerVO;
-import hu.lamsoft.hms.common.service.regimen.vo.RegimenForCustomerVO;
-import hu.lamsoft.hms.common.service.regimen.vo.RegimenVO;
+import hu.lamsoft.hms.common.service.customer.dto.CustomerDTO;
+import hu.lamsoft.hms.common.service.regimen.dto.RegimenDTO;
+import hu.lamsoft.hms.common.service.regimen.dto.RegimenForCustomerDTO;
 
 public interface RegimenForCustomerService {
 
-	RegimenForCustomerVO assignRegimenToCustomer(RegimenVO regimen, CustomerVO customer);
+	RegimenForCustomerDTO assignRegimenToCustomer(RegimenDTO regimen, CustomerDTO customer);
 	
-	RegimenForCustomerVO unAssignRegimenToCustomer(RegimenForCustomerVO regimenForCustomer, CustomerVO customer);
+	RegimenForCustomerDTO unAssignRegimenToCustomer(RegimenForCustomerDTO regimenForCustomer, CustomerDTO customer);
 	
-	List<RegimenForCustomerVO> getRegimenForCustomer(String email);
+	List<RegimenForCustomerDTO> getRegimenForCustomer(String email);
 	
 }

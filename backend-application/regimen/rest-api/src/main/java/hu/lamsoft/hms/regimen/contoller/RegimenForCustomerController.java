@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import hu.lamsoft.hms.common.restapi.security.jwt.AuthenticatedUser;
 import hu.lamsoft.hms.common.service.customer.CustomerService;
 import hu.lamsoft.hms.common.service.regimen.RegimenForCustomerService;
-import hu.lamsoft.hms.common.service.regimen.vo.RegimenForCustomerVO;
-import hu.lamsoft.hms.common.service.regimen.vo.RegimenVO;
+import hu.lamsoft.hms.common.service.regimen.dto.RegimenDTO;
+import hu.lamsoft.hms.common.service.regimen.dto.RegimenForCustomerDTO;
 
 @RestController
 @RequestMapping("/secured")
@@ -26,19 +26,19 @@ public class RegimenForCustomerController {
 	private RegimenForCustomerService regimenForCustomerService;
 	
 	@RequestMapping(value = "/assign-regimen", method = RequestMethod.POST)
-    public RegimenForCustomerVO getFoods(@RequestBody RegimenVO regimenVO) {
+    public RegimenForCustomerDTO getFoods(@RequestBody RegimenDTO regimen) {
 		AuthenticatedUser authenticatedUser = (AuthenticatedUser) SecurityContextHolder.getContext().getAuthentication();
-        return regimenForCustomerService.assignRegimenToCustomer(regimenVO, customerService.getCustomer(authenticatedUser.getName()));
+        return regimenForCustomerService.assignRegimenToCustomer(regimen, customerService.getCustomer(authenticatedUser.getName()));
     }
 	
 	@RequestMapping(value = "/un-assign-regimen", method = RequestMethod.PUT)
-    public RegimenForCustomerVO getFoods(@RequestBody RegimenForCustomerVO regimenForCustomerVO) {
+    public RegimenForCustomerDTO getFoods(@RequestBody RegimenForCustomerDTO regimenForCustomer) {
 		AuthenticatedUser authenticatedUser = (AuthenticatedUser) SecurityContextHolder.getContext().getAuthentication();
-        return regimenForCustomerService.unAssignRegimenToCustomer(regimenForCustomerVO, customerService.getCustomer(authenticatedUser.getName()));
+        return regimenForCustomerService.unAssignRegimenToCustomer(regimenForCustomer, customerService.getCustomer(authenticatedUser.getName()));
     }
 	
 	@RequestMapping(value = "/regimens-for-customer", method = RequestMethod.GET)
-    public List<RegimenForCustomerVO> getRegimensForCustomer() {
+    public List<RegimenForCustomerDTO> getRegimensForCustomer() {
 		AuthenticatedUser authenticatedUser = (AuthenticatedUser) SecurityContextHolder.getContext().getAuthentication();
         return regimenForCustomerService.getRegimenForCustomer(authenticatedUser.getName());
     }

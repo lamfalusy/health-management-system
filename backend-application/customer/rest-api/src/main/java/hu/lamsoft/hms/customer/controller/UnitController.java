@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import hu.lamsoft.hms.common.service.unit.UnitService;
-import hu.lamsoft.hms.common.service.unit.vo.UnitVO;
+import hu.lamsoft.hms.common.service.unit.dto.UnitDTO;
 
 @RestController
 @RequestMapping("/secured")
@@ -18,7 +18,7 @@ public class UnitController {
 	private UnitService unitService;
 	
 	@RequestMapping(value = "/units", method = RequestMethod.GET)
-    public List<UnitVO> getUnits() {
+    public List<UnitDTO> getUnits() {
         return unitService.getUnits();
     }
 	

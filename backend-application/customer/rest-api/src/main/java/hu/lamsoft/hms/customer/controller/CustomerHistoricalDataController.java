@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import hu.lamsoft.hms.common.restapi.security.jwt.AuthenticatedUser;
 import hu.lamsoft.hms.common.service.customer.CustomerHistoricalDataService;
 import hu.lamsoft.hms.common.service.customer.CustomerService;
-import hu.lamsoft.hms.common.service.customer.vo.CustomerHistoricalDataVO;
-import hu.lamsoft.hms.common.service.customer.vo.CustomerHistoricalDataValueVO;
+import hu.lamsoft.hms.common.service.customer.dto.CustomerHistoricalDataDTO;
+import hu.lamsoft.hms.common.service.customer.dto.CustomerHistoricalDataValueDTO;
 
 @RestController
 @RequestMapping("/secured")
@@ -29,19 +29,19 @@ public class CustomerHistoricalDataController {
 	private CustomerHistoricalDataService customerHistoricalDataService;
 	
 	@RequestMapping(value = "/historical-data-value", method = RequestMethod.POST)
-    public CustomerHistoricalDataValueVO postHistoricalDataValue(@RequestBody CustomerHistoricalDataValueVO historicalDataValue) {
+    public CustomerHistoricalDataValueDTO postHistoricalDataValue(@RequestBody CustomerHistoricalDataValueDTO historicalDataValue) {
 		AuthenticatedUser authenticatedUser = (AuthenticatedUser) SecurityContextHolder.getContext().getAuthentication();
 		historicalDataValue.setCustomer(customerService.getCustomer(authenticatedUser.getName()));
         return customerHistoricalDataService.recordHistoricalData(historicalDataValue);
     }
 
 	@RequestMapping(value = "/historical-datas", method = RequestMethod.GET)
-    public List<CustomerHistoricalDataVO> getCustomerHistoricalDatas() {
+    public List<CustomerHistoricalDataDTO> getCustomerHistoricalDatas() {
         return customerHistoricalDataService.getHistoricalDatas();
     }
 	
 	@RequestMapping(value = "/historical-data-values", method = RequestMethod.GET)
-    public List<CustomerHistoricalDataValueVO> getHistoricalDataValues(
+    public List<CustomerHistoricalDataValueDTO> getHistoricalDataValues(
     		@RequestParam(name = "historicalDataCode", required = true) String historicalDataCode,
     		@RequestParam(name = "fromDate", required = true) @DateTimeFormat(pattern="yyyy-MM-dd") Date fromDate,
     		@RequestParam(name = "toDate", required = true) @DateTimeFormat(pattern="yyyy-MM-dd") Date toDate) {

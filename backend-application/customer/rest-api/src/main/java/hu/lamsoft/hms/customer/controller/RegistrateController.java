@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import hu.lamsoft.hms.common.service.customer.CustomerService;
+import hu.lamsoft.hms.common.service.customer.dto.CustomerDTO;
 import hu.lamsoft.hms.common.service.customer.vo.CustomerRegistrationVO;
-import hu.lamsoft.hms.common.service.customer.vo.CustomerVO;
 
 @RestController
 public class RegistrateController {
@@ -17,8 +17,8 @@ public class RegistrateController {
 	private CustomerService customerService;
 	
 	@RequestMapping(value = "/registrate", method = RequestMethod.POST)
-    public CustomerVO registrate(@RequestBody CustomerRegistrationVO customer) {
-        return customerService.registrate(customer);
+    public CustomerDTO registrate(@RequestBody CustomerRegistrationVO customerRegistration) {
+        return customerService.registrate(customerRegistration);
     }
 	
 }

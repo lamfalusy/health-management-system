@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import hu.lamsoft.hms.common.persistence.regimen.dao.RegimenDao;
 import hu.lamsoft.hms.common.service.mapper.ModelMapper;
 import hu.lamsoft.hms.common.service.regimen.RegimenService;
+import hu.lamsoft.hms.common.service.regimen.dto.RegimenDTO;
 import hu.lamsoft.hms.common.service.regimen.vo.RegimenSearchVO;
-import hu.lamsoft.hms.common.service.regimen.vo.RegimenVO;
 import hu.lamsoft.hms.common.service.search.impl.SearchPredicateBuilderComponent;
 
 @Service
@@ -27,8 +27,8 @@ public class RegimenServiceImpl implements RegimenService {
 	private SearchPredicateBuilderComponent searchPredicateBuilderComponent;	
 	
 	@Override
-	public Page<RegimenVO> searchRegimen(RegimenSearchVO regimenSearchVO) {
-		return modelMapper.convertToVO(regimenDao.findAll(searchPredicateBuilderComponent.build(regimenSearchVO, RegimenSearchVO.class), regimenSearchVO), RegimenVO.class);
+	public Page<RegimenDTO> searchRegimen(RegimenSearchVO regimenSearchVO) {
+		return modelMapper.convertToDTO(regimenDao.findAll(searchPredicateBuilderComponent.build(regimenSearchVO, RegimenSearchVO.class), regimenSearchVO), RegimenDTO.class);
 	}
 
 }

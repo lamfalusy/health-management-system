@@ -18,7 +18,7 @@ import hu.lamsoft.hms.common.persistence.regimen.enums.Meal;
 import hu.lamsoft.hms.common.persistence.unit.dao.UnitDao;
 import hu.lamsoft.hms.common.persistence.unit.entity.Unit;
 import hu.lamsoft.hms.common.service.customer.CustomerMealService;
-import hu.lamsoft.hms.common.service.customer.vo.CustomerMealVO;
+import hu.lamsoft.hms.common.service.customer.dto.CustomerMealDTO;
 import hu.lamsoft.hms.common.service.mapper.ModelMapper;
 
 @Service
@@ -43,7 +43,7 @@ public class CustomerMealServiceImpl implements CustomerMealService {
 	}
 
 	@Override
-	public CustomerMealVO recordCustomerMeal(CustomerMealVO customerMeal) {
+	public CustomerMealDTO recordCustomerMeal(CustomerMealDTO customerMeal) {
 		Assert.notNull(customerMeal);
 		Assert.isNull(customerMeal.getId());
 		Assert.notNull(customerMeal.getFood());
@@ -59,12 +59,12 @@ public class CustomerMealServiceImpl implements CustomerMealService {
 		CustomerMeal entity = modelMapper.convertToEntity(customerMeal, CustomerMeal.class);
 		entity.setFood(food);
 		entity.getQuantity().setUnit(unit);
-		return modelMapper.convertToVO(customerMealDao.save(entity), CustomerMealVO.class);
+		return modelMapper.convertToDTO(customerMealDao.save(entity), CustomerMealDTO.class);
 	}
 
 	@Override
-	public List<CustomerMealVO> getCustomerMeal(String email, Date fromDate, Date toDate) {
-		return modelMapper.convertToVO(customerMealDao.findByCustomerEmailAndTimeOfMealBetween(email, fromDate, toDate), CustomerMealVO.class);
+	public List<CustomerMealDTO> getCustomerMeal(String email, Date fromDate, Date toDate) {
+		return modelMapper.convertToDTO(customerMealDao.findByCustomerEmailAndTimeOfMealBetween(email, fromDate, toDate), CustomerMealDTO.class);
 	}
 
 }

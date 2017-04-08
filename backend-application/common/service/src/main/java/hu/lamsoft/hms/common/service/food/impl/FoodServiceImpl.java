@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import hu.lamsoft.hms.common.persistence.food.dao.FoodDao;
 import hu.lamsoft.hms.common.service.food.FoodService;
+import hu.lamsoft.hms.common.service.food.dto.FoodDTO;
 import hu.lamsoft.hms.common.service.food.vo.FoodSearchVO;
-import hu.lamsoft.hms.common.service.food.vo.FoodVO;
 import hu.lamsoft.hms.common.service.mapper.ModelMapper;
 import hu.lamsoft.hms.common.service.search.impl.SearchPredicateBuilderComponent;
 
@@ -27,8 +27,8 @@ public class FoodServiceImpl implements FoodService {
 	private SearchPredicateBuilderComponent searchPredicateBuilderComponent;
 	
 	@Override
-	public Page<FoodVO> searchFood(FoodSearchVO foodSearchVO) {
-		return modelMapper.convertToVO(foodDao.findAll(searchPredicateBuilderComponent.build(foodSearchVO, FoodSearchVO.class), foodSearchVO), FoodVO.class);
+	public Page<FoodDTO> searchFood(FoodSearchVO foodSearchVO) {
+		return modelMapper.convertToDTO(foodDao.findAll(searchPredicateBuilderComponent.build(foodSearchVO, FoodSearchVO.class), foodSearchVO), FoodDTO.class);
 	}
 
 

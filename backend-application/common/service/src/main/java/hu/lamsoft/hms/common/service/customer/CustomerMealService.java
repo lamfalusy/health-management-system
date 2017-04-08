@@ -4,14 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 import hu.lamsoft.hms.common.persistence.regimen.enums.Meal;
-import hu.lamsoft.hms.common.service.customer.vo.CustomerMealVO;
+import hu.lamsoft.hms.common.service.customer.dto.CustomerMealDTO;
 
 public interface CustomerMealService {
 
 	List<Meal> getMeals();
 	
-	CustomerMealVO recordCustomerMeal(CustomerMealVO customerMeal);
+	CustomerMealDTO recordCustomerMeal(CustomerMealDTO customerMeal);
 	
-	List<CustomerMealVO> getCustomerMeal(String email, Date fromDate, Date toDate);
+	List<CustomerMealDTO> getCustomerMeal(String email, Date fromDate, Date toDate);
 	
 }

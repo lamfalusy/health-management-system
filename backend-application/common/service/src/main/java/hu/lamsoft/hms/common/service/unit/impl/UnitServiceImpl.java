@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import hu.lamsoft.hms.common.persistence.unit.dao.UnitDao;
 import hu.lamsoft.hms.common.service.mapper.ModelMapper;
 import hu.lamsoft.hms.common.service.unit.UnitService;
-import hu.lamsoft.hms.common.service.unit.vo.UnitVO;
+import hu.lamsoft.hms.common.service.unit.dto.UnitDTO;
 
 @Service
 @Transactional
@@ -23,8 +23,8 @@ public class UnitServiceImpl implements UnitService {
 	private ModelMapper modelMapper;
 	
 	@Override
-	public List<UnitVO> getUnits() {
-		return modelMapper.convertToVO(unitDao.findAll(), UnitVO.class);
+	public List<UnitDTO> getUnits() {
+		return modelMapper.convertToDTO(unitDao.findAll(), UnitDTO.class);
 	}
 
 }

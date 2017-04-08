@@ -1,12 +1,12 @@
 package hu.lamsoft.hms.common.service.customer;
 
+import hu.lamsoft.hms.common.service.customer.dto.CustomerDTO;
 import hu.lamsoft.hms.common.service.customer.vo.CustomerRegistrationVO;
-import hu.lamsoft.hms.common.service.customer.vo.CustomerVO;
 
 public interface CustomerService {
 
-	CustomerVO registrate(CustomerRegistrationVO customer);
+	CustomerDTO registrate(CustomerRegistrationVO customer);
 	
-	CustomerVO getCustomer(String email);
+	CustomerDTO getCustomer(String email);
 	
 }

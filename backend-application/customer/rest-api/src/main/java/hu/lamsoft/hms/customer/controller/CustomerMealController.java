@@ -16,7 +16,7 @@ import hu.lamsoft.hms.common.persistence.regimen.enums.Meal;
 import hu.lamsoft.hms.common.restapi.security.jwt.AuthenticatedUser;
 import hu.lamsoft.hms.common.service.customer.CustomerMealService;
 import hu.lamsoft.hms.common.service.customer.CustomerService;
-import hu.lamsoft.hms.common.service.customer.vo.CustomerMealVO;
+import hu.lamsoft.hms.common.service.customer.dto.CustomerMealDTO;
 
 @RestController
 @RequestMapping("/secured")
@@ -34,14 +34,14 @@ public class CustomerMealController {
     }
 	
 	@RequestMapping(value = "/customer-meal", method = RequestMethod.POST)
-    public CustomerMealVO postCustomerMeal(@RequestBody CustomerMealVO customerMealVO) {
+    public CustomerMealDTO postCustomerMeal(@RequestBody CustomerMealDTO customerMeal) {
 		AuthenticatedUser authenticatedUser = (AuthenticatedUser) SecurityContextHolder.getContext().getAuthentication();
-		customerMealVO.setCustomer(customerService.getCustomer(authenticatedUser.getName()));
-        return customerMealService.recordCustomerMeal(customerMealVO);
+		customerMeal.setCustomer(customerService.getCustomer(authenticatedUser.getName()));
+        return customerMealService.recordCustomerMeal(customerMeal);
     }
 	
 	@RequestMapping(value = "/customer-meals", method = RequestMethod.GET)
-    public List<CustomerMealVO> getCustomerMeals(
+    public List<CustomerMealDTO> getCustomerMeals(
     		@RequestParam(name = "fromDate", required = true) @DateTimeFormat(pattern="yyyy-MM-dd") Date fromDate,
     		@RequestParam(name = "toDate", required = true) @DateTimeFormat(pattern="yyyy-MM-dd") Date toDate) {
 		AuthenticatedUser authenticatedUser = (AuthenticatedUser) SecurityContextHolder.getContext().getAuthentication();

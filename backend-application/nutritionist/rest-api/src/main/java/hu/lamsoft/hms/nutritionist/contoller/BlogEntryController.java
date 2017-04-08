@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import hu.lamsoft.hms.common.service.nutritionist.BlogEntryService;
+import hu.lamsoft.hms.common.service.nutritionist.dto.BlogEntryDTO;
 import hu.lamsoft.hms.common.service.nutritionist.vo.BlogEntrySearchVO;
-import hu.lamsoft.hms.common.service.nutritionist.vo.BlogEntryVO;
 
 @RestController
 public class BlogEntryController {
@@ -19,13 +19,13 @@ public class BlogEntryController {
 	private BlogEntryService blogEntryService;
 	
 	@RequestMapping(value = "/blog-entries", method = RequestMethod.GET)
-    public Page<BlogEntryVO> getBlogEntries(@RequestParam(name = "page", required = false, defaultValue = "0") int page,
+    public Page<BlogEntryDTO> getBlogEntries(@RequestParam(name = "page", required = false, defaultValue = "0") int page,
     		@RequestParam(name = "size", required = false, defaultValue = "10") int size) {
         return blogEntryService.searchBlogEntry(new BlogEntrySearchVO(page, size));
     }
 	
 	@RequestMapping(value = "/blog-entries", method = RequestMethod.POST)
-    public Page<BlogEntryVO> getBlogEntries(@RequestBody BlogEntrySearchVO blogEntrySearchVO) {
+    public Page<BlogEntryDTO> getBlogEntries(@RequestBody BlogEntrySearchVO blogEntrySearchVO) {
         return blogEntryService.searchBlogEntry(blogEntrySearchVO);
     }
 	

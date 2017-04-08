@@ -15,11 +15,11 @@ import hu.lamsoft.hms.common.persistence.regimen.dao.RegimenDao;
 import hu.lamsoft.hms.common.persistence.regimen.dao.RegimenForCustomerDao;
 import hu.lamsoft.hms.common.persistence.regimen.entity.Regimen;
 import hu.lamsoft.hms.common.persistence.regimen.entity.RegimenForCustomer;
-import hu.lamsoft.hms.common.service.customer.vo.CustomerVO;
+import hu.lamsoft.hms.common.service.customer.dto.CustomerDTO;
 import hu.lamsoft.hms.common.service.mapper.ModelMapper;
 import hu.lamsoft.hms.common.service.regimen.RegimenForCustomerService;
-import hu.lamsoft.hms.common.service.regimen.vo.RegimenForCustomerVO;
-import hu.lamsoft.hms.common.service.regimen.vo.RegimenVO;
+import hu.lamsoft.hms.common.service.regimen.dto.RegimenDTO;
+import hu.lamsoft.hms.common.service.regimen.dto.RegimenForCustomerDTO;
 
 @Service
 @Transactional
@@ -38,7 +38,7 @@ public class RegimenForCustomerServiceImpl implements RegimenForCustomerService 
 	private ModelMapper modelMapper;	
 	
 	@Override
-	public RegimenForCustomerVO assignRegimenToCustomer(RegimenVO regimen, CustomerVO customer) {
+	public RegimenForCustomerDTO assignRegimenToCustomer(RegimenDTO regimen, CustomerDTO customer) {
 		Assert.notNull(regimen);
 		Assert.notNull(customer);
 		Regimen regimenEntity = regimenDao.findOne(regimen.getId());
@@ -49,11 +49,11 @@ public class RegimenForCustomerServiceImpl implements RegimenForCustomerService 
 		entity.setCustomer(customerEntity);
 		entity.setRegimen(regimenEntity);
 		entity.setStartDate(new Date());
-		return modelMapper.convertToVO(regimenForCustomerDao.save(entity), RegimenForCustomerVO.class);
+		return modelMapper.convertToDTO(regimenForCustomerDao.save(entity), RegimenForCustomerDTO.class);
 	}
 
 	@Override
-	public RegimenForCustomerVO unAssignRegimenToCustomer(RegimenForCustomerVO regimenForCustomer, CustomerVO customer) {
+	public RegimenForCustomerDTO unAssignRegimenToCustomer(RegimenForCustomerDTO regimenForCustomer, CustomerDTO customer) {
 		Assert.notNull(regimenForCustomer);
 		Assert.notNull(customer);
 		RegimenForCustomer entity = regimenForCustomerDao.findOne(regimenForCustomer.getId());
@@ -61,12 +61,12 @@ public class RegimenForCustomerServiceImpl implements RegimenForCustomerService 
 		Assert.isTrue(entity.getCustomer().getId().equals(customer.getId()), "Access denied for regimen for customer.");
 		Assert.isNull(entity.getEndDate(), "Regimen for customer is already unassigned.");
 		entity.setEndDate(new Date());
-		return modelMapper.convertToVO(regimenForCustomerDao.save(entity), RegimenForCustomerVO.class);
+		return modelMapper.convertToDTO(regimenForCustomerDao.save(entity), RegimenForCustomerDTO.class);
 	}
 
 	@Override
-	public List<RegimenForCustomerVO> getRegimenForCustomer(String email) {
-		return modelMapper.convertToVO(regimenForCustomerDao.findByCustomerEmail(email), RegimenForCustomerVO.class);
+	public List<RegimenForCustomerDTO> getRegimenForCustomer(String email) {
+		return modelMapper.convertToDTO(regimenForCustomerDao.findByCustomerEmail(email), RegimenForCustomerDTO.class);
 	}
 
 }

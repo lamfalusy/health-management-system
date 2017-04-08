@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 import hu.lamsoft.hms.common.persistence.customer.dao.CustomerDao;
 import hu.lamsoft.hms.common.persistence.customer.entity.Customer;
 import hu.lamsoft.hms.common.service.customer.CustomerService;
+import hu.lamsoft.hms.common.service.customer.dto.CustomerDTO;
 import hu.lamsoft.hms.common.service.customer.exception.EmailAddressAlreadyUsedException;
 import hu.lamsoft.hms.common.service.customer.vo.CustomerRegistrationVO;
-import hu.lamsoft.hms.common.service.customer.vo.CustomerVO;
 import hu.lamsoft.hms.common.service.mapper.ModelMapper;
 
 @Service
@@ -28,7 +28,7 @@ public class CustomerServiceImpl implements CustomerService {
 	private ModelMapper modelMapper;
 	
 	@Override
-	public CustomerVO registrate(CustomerRegistrationVO customerRegistration) {
+	public CustomerDTO registrate(CustomerRegistrationVO customerRegistration) {
 		if(customerDao.findByEmail(customerRegistration.getEmail()) != null) {
 			throw new EmailAddressAlreadyUsedException();
 		}
@@ -38,12 +38,12 @@ public class CustomerServiceImpl implements CustomerService {
 		entity.setEmail(customerRegistration.getEmail());
 		entity.setBirthday(customerRegistration.getBirthday());
 		entity.setPassword(passwordEncoder.encode(customerRegistration.getRawPassword()));
-		return modelMapper.convertToVO(customerDao.save(entity), CustomerVO.class);
+		return modelMapper.convertToDTO(customerDao.save(entity), CustomerDTO.class);
 	}
 
 	@Override
-	public CustomerVO getCustomer(String email) {
-		return modelMapper.convertToVO(customerDao.findByEmail(email), CustomerVO.class);
+	public CustomerDTO getCustomer(String email) {
+		return modelMapper.convertToDTO(customerDao.findByEmail(email), CustomerDTO.class);
 	}
 
 }

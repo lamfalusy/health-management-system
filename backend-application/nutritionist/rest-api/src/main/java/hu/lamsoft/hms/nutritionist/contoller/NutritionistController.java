@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import hu.lamsoft.hms.common.restapi.security.jwt.AuthenticatedUser;
 import hu.lamsoft.hms.common.service.customer.CustomerService;
 import hu.lamsoft.hms.common.service.nutritionist.NutritionistService;
+import hu.lamsoft.hms.common.service.nutritionist.dto.NutritionistDTO;
 import hu.lamsoft.hms.common.service.nutritionist.vo.NutritionistSearchVO;
-import hu.lamsoft.hms.common.service.nutritionist.vo.NutritionistVO;
 
 @RestController
 public class NutritionistController {
@@ -25,21 +25,21 @@ public class NutritionistController {
 	private CustomerService customerService;
 	
 	@RequestMapping(value = "/nutritionists", method = RequestMethod.GET)
-    public Page<NutritionistVO> getNutritionists(@RequestParam(name = "page", required = false, defaultValue = "0") int page,
+    public Page<NutritionistDTO> getNutritionists(@RequestParam(name = "page", required = false, defaultValue = "0") int page,
     		@RequestParam(name = "size", required = false, defaultValue = "10") int size) {
         return nutritionistService.searchNutritionist(new NutritionistSearchVO(page, size));
     }
 	
 	@RequestMapping(value = "/nutritionists", method = RequestMethod.POST)
-    public Page<NutritionistVO> getNutritionists(@RequestBody NutritionistSearchVO nutritionistSearchVO) {
+    public Page<NutritionistDTO> getNutritionists(@RequestBody NutritionistSearchVO nutritionistSearchVO) {
         return nutritionistService.searchNutritionist(nutritionistSearchVO);
     }
 	
 	@RequestMapping(value = "/nutritionist", method = RequestMethod.POST)
-    public NutritionistVO postNutritionist(@RequestBody NutritionistVO nutritionistVO) {
+    public NutritionistDTO postNutritionist(@RequestBody NutritionistDTO nutritionist) {
 		AuthenticatedUser authenticatedUser = (AuthenticatedUser) SecurityContextHolder.getContext().getAuthentication();
-		nutritionistVO.setCustomer(customerService.getCustomer(authenticatedUser.getName()));
-		return nutritionistService.registrate(nutritionistVO);
+		nutritionist.setCustomer(customerService.getCustomer(authenticatedUser.getName()));
+		return nutritionistService.registrate(nutritionist);
     }
 	
 }

@@ -1,12 +1,16 @@
 package hu.lamsoft.hms.common.service.customer.vo;
 
+import java.util.Date;
+
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper=true)
-public class CustomerRegistrationVO extends CustomerVO {
+public class CustomerRegistrationVO {
 
+	private String email;
+	private String firstname;
+	private String lastname;
+	private Date birthday;
 	private String rawPassword;
 	
 }

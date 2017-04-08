@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import hu.lamsoft.hms.common.service.food.FoodService;
+import hu.lamsoft.hms.common.service.food.dto.FoodDTO;
 import hu.lamsoft.hms.common.service.food.vo.FoodSearchVO;
-import hu.lamsoft.hms.common.service.food.vo.FoodVO;
 
 @RestController
 public class FoodController {
@@ -19,13 +19,13 @@ public class FoodController {
 	private FoodService foodService;
 	
 	@RequestMapping(value = "/foods", method = RequestMethod.GET)
-    public Page<FoodVO> getFoods(@RequestParam(name = "page", required = false, defaultValue = "0") int page,
+    public Page<FoodDTO> getFoods(@RequestParam(name = "page", required = false, defaultValue = "0") int page,
     		@RequestParam(name = "size", required = false, defaultValue = "10") int size) {
         return foodService.searchFood(new FoodSearchVO(page, size));
     }
 	
 	@RequestMapping(value = "/foods", method = RequestMethod.POST)
-    public Page<FoodVO> getFoods(@RequestBody FoodSearchVO foodSearchVO) {
+    public Page<FoodDTO> getFoods(@RequestBody FoodSearchVO foodSearchVO) {
         return foodService.searchFood(foodSearchVO);
     }
 	

@@ -1,14 +1,14 @@
-package hu.lamsoft.hms.common.service.customer.vo;
+package hu.lamsoft.hms.common.service.customer.dto;
 
 import java.util.Date;
 
-import hu.lamsoft.hms.common.service.vo.BaseVO;
+import hu.lamsoft.hms.common.service.dto.BaseDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper=true)
-public class CustomerVO extends BaseVO {
+public class CustomerDTO extends BaseDTO {
 
 	private String email;
 	private String firstname;

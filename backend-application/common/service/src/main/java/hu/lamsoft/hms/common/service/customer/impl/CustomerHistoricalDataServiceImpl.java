@@ -14,8 +14,8 @@ import hu.lamsoft.hms.common.persistence.customer.dao.CustomerHistoricalDataValu
 import hu.lamsoft.hms.common.persistence.customer.entity.CustomerHistoricalData;
 import hu.lamsoft.hms.common.persistence.customer.entity.CustomerHistoricalDataValue;
 import hu.lamsoft.hms.common.service.customer.CustomerHistoricalDataService;
-import hu.lamsoft.hms.common.service.customer.vo.CustomerHistoricalDataVO;
-import hu.lamsoft.hms.common.service.customer.vo.CustomerHistoricalDataValueVO;
+import hu.lamsoft.hms.common.service.customer.dto.CustomerHistoricalDataDTO;
+import hu.lamsoft.hms.common.service.customer.dto.CustomerHistoricalDataValueDTO;
 import hu.lamsoft.hms.common.service.mapper.ModelMapper;
 
 @Service
@@ -32,12 +32,12 @@ public class CustomerHistoricalDataServiceImpl implements CustomerHistoricalData
 	private ModelMapper modelMapper;
 	
 	@Override
-	public List<CustomerHistoricalDataVO> getHistoricalDatas() {
-		return modelMapper.convertToVO(customerHistoricalDataDao.findAll(), CustomerHistoricalDataVO.class);
+	public List<CustomerHistoricalDataDTO> getHistoricalDatas() {
+		return modelMapper.convertToDTO(customerHistoricalDataDao.findAll(), CustomerHistoricalDataDTO.class);
 	}
 	
 	@Override
-	public CustomerHistoricalDataValueVO recordHistoricalData(CustomerHistoricalDataValueVO historicalDataValue) {
+	public CustomerHistoricalDataValueDTO recordHistoricalData(CustomerHistoricalDataValueDTO historicalDataValue) {
 		Assert.notNull(historicalDataValue);
 		Assert.isNull(historicalDataValue.getId());
 		Assert.notNull(historicalDataValue.getCustomerHistoricalData());
@@ -45,12 +45,12 @@ public class CustomerHistoricalDataServiceImpl implements CustomerHistoricalData
 		Assert.notNull(customerHistoricalData);
 		CustomerHistoricalDataValue entity = modelMapper.convertToEntity(historicalDataValue, CustomerHistoricalDataValue.class);
 		entity.setCustomerHistoricalData(customerHistoricalData);
-		return modelMapper.convertToVO(customerHistoricalDataValueDao.save(entity), CustomerHistoricalDataValueVO.class);
+		return modelMapper.convertToDTO(customerHistoricalDataValueDao.save(entity), CustomerHistoricalDataValueDTO.class);
 	}
 
 	@Override
-	public List<CustomerHistoricalDataValueVO> getHistoricalData(String email, String historicalDataCode, Date fromDate, Date toDate) {
-		return modelMapper.convertToVO(customerHistoricalDataValueDao.findByCustomerEmailAndCustomerHistoricalDataCodeAndValidAtBetween(email, historicalDataCode, fromDate, toDate), CustomerHistoricalDataValueVO.class);
+	public List<CustomerHistoricalDataValueDTO> getHistoricalData(String email, String historicalDataCode, Date fromDate, Date toDate) {
+		return modelMapper.convertToDTO(customerHistoricalDataValueDao.findByCustomerEmailAndCustomerHistoricalDataCodeAndValidAtBetween(email, historicalDataCode, fromDate, toDate), CustomerHistoricalDataValueDTO.class);
 	}
 
 }
