@@ -11,6 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import java.util.Date;
+
+import hu.lamsoft.hms.androidclient.component.session.Session;
 import hu.lamsoft.hms.androidclient.fragment.BlogEntriesFragment;
 import hu.lamsoft.hms.androidclient.fragment.FragmentManager;
 import hu.lamsoft.hms.androidclient.fragment.NutritionistsFragment;
@@ -18,6 +21,14 @@ import hu.lamsoft.hms.androidclient.fragment.RegimensFragment;
 import hu.lamsoft.hms.androidclient.restapi.DisableSSLCertificateCheckUtil;
 import hu.lamsoft.hms.androidclient.fragment.FoodsFragment;
 import hu.lamsoft.hms.androidclient.fragment.RecipesFragment;
+import hu.lamsoft.hms.androidclient.restapi.common.async.AsyncCallback;
+import hu.lamsoft.hms.androidclient.restapi.customer.async.CustomerAsyncTask;
+import hu.lamsoft.hms.androidclient.restapi.customer.async.LoginAsyncTask;
+import hu.lamsoft.hms.androidclient.restapi.customer.async.RegistrationAsyncTask;
+import hu.lamsoft.hms.androidclient.restapi.customer.dto.CustomerDTO;
+import hu.lamsoft.hms.androidclient.restapi.customer.vo.CustomerRegistrationVO;
+import hu.lamsoft.hms.androidclient.restapi.customer.vo.LogedInCustomerVO;
+import hu.lamsoft.hms.androidclient.restapi.customer.vo.LoginVO;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -47,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (savedInstanceState != null) {
                 return;
             }
-            addFragment(RecipesFragment.class);
+            addFragment(FoodsFragment.class);
         }
     }
 
@@ -64,6 +75,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
+        // haha
+        CustomerRegistrationVO regVO = new CustomerRegistrationVO();
+        regVO.setEmail("android@test.and");
+        regVO.setBirthday(new Date());
+        regVO.setRawPassword("password");
+        new RegistrationAsyncTask(regVO, new AsyncCallback<CustomerDTO>() {
+            @Override
+            public void onPostExecute(CustomerDTO customerDTO) {
+                LoginVO loginVO = new LoginVO();
+                loginVO.setUsername("android@test.and");
+                loginVO.setPassword("password");
+                new LoginAsyncTask(loginVO, new AsyncCallback<LogedInCustomerVO>(){
+                    @Override
+                    public void onPostExecute(LogedInCustomerVO logedInCustomerVO) {
+                        Session.instance.getAuthenticationManager().login(logedInCustomerVO);
+                        Log.i("MainActivity", Session.instance.getAuthenticationManager().getToken());
+                        new CustomerAsyncTask(new AsyncCallback<CustomerDTO>() {
+                            @Override
+                            public void onPostExecute(CustomerDTO customerDTO) {
+                                Log.i("MainActivity", customerDTO.toString());
+                            }
+                        }).execute();
+                    }
+                }).execute();
+            }
+        }).execute();
+
+
+
         int id = item.getItemId();
         if (id == R.id.nav_foods) {
             addFragment(FoodsFragment.class);

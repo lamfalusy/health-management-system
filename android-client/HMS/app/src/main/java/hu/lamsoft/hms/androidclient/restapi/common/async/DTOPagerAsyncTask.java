@@ -1,6 +1,5 @@
 package hu.lamsoft.hms.androidclient.restapi.common.async;
 
-import android.os.AsyncTask;
 import android.util.Log;
 
 import org.springframework.core.ParameterizedTypeReference;
@@ -15,27 +14,24 @@ import hu.lamsoft.hms.androidclient.restapi.common.dto.Page;
  * Created by admin on 2017. 04. 15..
  */
 
-public abstract class DTOPagerAsyncTask<T extends BaseDTO> extends AsyncTask<Object, Integer, Page<T>> {
-
-    private static final String BASE_URL = "https://192.168.0.49";
+public abstract class DTOPagerAsyncTask<T extends BaseDTO> extends HMSAsyncTask<Object, Integer, Page<T>> {
 
     private int page = 0;
     private int size = 25;
-    private AsyncCallback<Page<T>> callback;
 
     public DTOPagerAsyncTask(AsyncCallback<Page<T>> callback) {
-        this.callback = callback;
+        super(callback);
     }
 
     public DTOPagerAsyncTask(int page, AsyncCallback<Page<T>> callback) {
+        super(callback);
         this.page = page;
-        this.callback = callback;
     }
 
     public DTOPagerAsyncTask(int page, int size, AsyncCallback<Page<T>> callback) {
+        super(callback);
         this.page = page;
         this.size = size;
-        this.callback = callback;
     }
 
     @Override
@@ -49,12 +45,6 @@ public abstract class DTOPagerAsyncTask<T extends BaseDTO> extends AsyncTask<Obj
             Log.e("DTOPagerAsyncTask", e.getMessage(), e);
         }
         return null;
-    }
-
-    @Override
-    protected void onPostExecute(Page<T> dtoPage) {
-        super.onPostExecute(dtoPage);
-        callback.onPostExecute(dtoPage);
     }
 
     protected abstract String getPath();
