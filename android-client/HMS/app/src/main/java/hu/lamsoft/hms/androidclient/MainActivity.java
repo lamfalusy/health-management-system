@@ -1,5 +1,6 @@
 package hu.lamsoft.hms.androidclient;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -13,6 +14,9 @@ import android.view.MenuItem;
 
 import java.util.Date;
 
+import hu.lamsoft.hms.androidclient.activity.LoginActivity;
+import hu.lamsoft.hms.androidclient.activity.NavigationActivity;
+import hu.lamsoft.hms.androidclient.activity.RegisterActivity;
 import hu.lamsoft.hms.androidclient.component.session.Session;
 import hu.lamsoft.hms.androidclient.fragment.BlogEntriesFragment;
 import hu.lamsoft.hms.androidclient.fragment.FragmentManager;
@@ -77,36 +81,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
 
         // haha
-        CustomerRegistrationVO regVO = new CustomerRegistrationVO();
-        regVO.setEmail("android@test.and");
-        regVO.setBirthday(new Date());
-        regVO.setRawPassword("password");
-        new RegistrationAsyncTask(regVO, new AsyncCallback<CustomerDTO>() {
-            @Override
-            public void onPostExecute(CustomerDTO customerDTO) {
-                LoginVO loginVO = new LoginVO();
-                loginVO.setUsername("android@test.and");
-                loginVO.setPassword("password");
-                new LoginAsyncTask(loginVO, new AsyncCallback<LogedInCustomerVO>(){
-                    @Override
-                    public void onPostExecute(LogedInCustomerVO logedInCustomerVO) {
-                        Session.instance.getAuthenticationManager().login(logedInCustomerVO);
-                        Log.i("MainActivity", Session.instance.getAuthenticationManager().getToken());
-                        new CustomerAsyncTask(new AsyncCallback<CustomerDTO>() {
-                            @Override
-                            public void onPostExecute(CustomerDTO customerDTO) {
-                                Log.i("MainActivity", customerDTO.toString());
-                            }
-                        }).execute();
-                    }
-                }).execute();
-            }
-        }).execute();
+//        CustomerRegistrationVO regVO = new CustomerRegistrationVO();
+//        regVO.setEmail("android@test.and");
+//        regVO.setBirthday(new Date());
+//        regVO.setRawPassword("password");
+//        new RegistrationAsyncTask(regVO, new AsyncCallback<CustomerDTO>() {
+//            @Override
+//            public void onPostExecute(CustomerDTO customerDTO) {
+//                LoginVO loginVO = new LoginVO();
+//                loginVO.setUsername("android@test.and");
+//                loginVO.setPassword("password");
+//                new LoginAsyncTask(loginVO, new AsyncCallback<LogedInCustomerVO>(){
+//                    @Override
+//                    public void onPostExecute(LogedInCustomerVO logedInCustomerVO) {
+//                        Session.instance.getAuthenticationManager().login(logedInCustomerVO);
+//                        Log.i("MainActivity", Session.instance.getAuthenticationManager().getToken());
+//                        new CustomerAsyncTask(new AsyncCallback<CustomerDTO>() {
+//                            @Override
+//                            public void onPostExecute(CustomerDTO customerDTO) {
+//                                Log.i("MainActivity", customerDTO.toString());
+//                            }
+//                        }).execute();
+//                    }
+//                }).execute();
+//            }
+//        }).execute();
 
 
 
         int id = item.getItemId();
-        if (id == R.id.nav_foods) {
+        if (id == R.id.nav_login) {
+            addActivity(LoginActivity.class);
+        } else if (id == R.id.nav_register) {
+            addActivity(RegisterActivity.class);
+        } else if (id == R.id.nav_foods) {
             addFragment(FoodsFragment.class);
         } else if (id == R.id.nav_recipes) {
             addFragment(RecipesFragment.class);
@@ -124,6 +132,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private <T extends Fragment> void addFragment(Class<T> type) {
         FragmentManager.instance.addFragment(type, getSupportFragmentManager().beginTransaction());
+    }
+
+    private <T extends NavigationActivity> void addActivity(Class<T> type) {
+        startActivity(new Intent(this, type));
     }
 
 }

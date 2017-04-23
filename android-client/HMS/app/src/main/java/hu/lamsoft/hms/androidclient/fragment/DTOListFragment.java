@@ -1,14 +1,19 @@
 package hu.lamsoft.hms.androidclient.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
+import hu.lamsoft.hms.androidclient.activity.BlogEntryActivity;
+import hu.lamsoft.hms.androidclient.activity.DTODetailsActivity;
 import hu.lamsoft.hms.androidclient.adapter.PageableDTOAdapter;
 import hu.lamsoft.hms.androidclient.adapter.ViewHolder;
 import hu.lamsoft.hms.androidclient.restapi.common.async.AsyncCallback;
@@ -20,7 +25,9 @@ import hu.lamsoft.hms.androidclient.restapi.common.dto.Page;
  * Created by admin on 2017. 04. 15..
  */
 
-public abstract class DTOListFragment<T extends BaseDTO, K extends ViewHolder<T>, L extends DTOPagerAsyncTask> extends Fragment {
+public abstract class DTOListFragment<T extends BaseDTO, K extends ViewHolder<T>, L extends DTOPagerAsyncTask> extends Fragment implements AdapterView.OnItemClickListener {
+
+    public static final String DTO_EXTRAS = "DtoExtras";
 
     private int page = 0;
     private boolean hasMore = true;
@@ -29,6 +36,8 @@ public abstract class DTOListFragment<T extends BaseDTO, K extends ViewHolder<T>
     private int fragmentLayoutResource;
     private int listViewResource;
     private int listItemResource;
+    private PageableDTOAdapter<T, K> adapter;
+    private Class<? extends DTODetailsActivity<T>> dtoDetailsActivity;
 
     public DTOListFragment(Class<K> viewHolderType, Class<L> asyncTaskType, int fragmentLayoutResource, int listViewResource, int listItemResource) {
         this.viewHolderType = viewHolderType;
@@ -36,6 +45,11 @@ public abstract class DTOListFragment<T extends BaseDTO, K extends ViewHolder<T>
         this.fragmentLayoutResource = fragmentLayoutResource;
         this.listViewResource = listViewResource;
         this.listItemResource = listItemResource;
+    }
+
+    public DTOListFragment(Class<K> viewHolderType, Class<L> asyncTaskType, int fragmentLayoutResource, int listViewResource, int listItemResource, Class<? extends DTODetailsActivity<T>> dtoDetailsActivity) {
+        this(viewHolderType, asyncTaskType, fragmentLayoutResource, listViewResource, listItemResource);
+        this.dtoDetailsActivity = dtoDetailsActivity;
     }
 
     @Override
@@ -49,7 +63,7 @@ public abstract class DTOListFragment<T extends BaseDTO, K extends ViewHolder<T>
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ListView listView = (ListView) getActivity().findViewById(listViewResource);
-        final PageableDTOAdapter adapter = new PageableDTOAdapter<T, K>(getActivity(), listItemResource, viewHolderType);
+        adapter = new PageableDTOAdapter<T, K>(getActivity(), listItemResource, viewHolderType);
         startLoadData(adapter);
         listView.setAdapter(adapter);
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -64,6 +78,7 @@ public abstract class DTOListFragment<T extends BaseDTO, K extends ViewHolder<T>
                 }
             }
         });
+        listView.setOnItemClickListener(this);
     }
 
     private synchronized void startLoadData(final PageableDTOAdapter adapter) {
@@ -85,6 +100,19 @@ public abstract class DTOListFragment<T extends BaseDTO, K extends ViewHolder<T>
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if(dtoDetailsActivity != null) {
+            onItemClick(adapter.getItem(position));
+        }
+    }
+
+    private void onItemClick(T clickedObject) {
+        Intent intent = new Intent(getActivity(), dtoDetailsActivity);
+        intent.putExtra(DTO_EXTRAS, clickedObject);
+        startActivity(intent);
     }
 
 }
