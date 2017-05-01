@@ -23,6 +23,8 @@ public class FragmentManager {
         fragmentMap.put(NutritionistsFragment.class, new NutritionistsFragment());
         fragmentMap.put(BlogEntriesFragment.class, new BlogEntriesFragment());
         fragmentMap.put(RegimensFragment.class, new RegimensFragment());
+        fragmentMap.put(MealsFragment.class, new MealsFragment());
+        fragmentMap.put(HistoricalDataFragment.class, new HistoricalDataFragment());
         instance = new FragmentManager(fragmentMap);
     }
 

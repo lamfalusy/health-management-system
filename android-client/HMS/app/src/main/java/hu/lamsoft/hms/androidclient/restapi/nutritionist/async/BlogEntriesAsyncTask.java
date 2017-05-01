@@ -1,4 +1,4 @@
-package hu.lamsoft.hms.androidclient.restapi.food.async;
+package hu.lamsoft.hms.androidclient.restapi.nutritionist.async;
 
 import org.springframework.core.ParameterizedTypeReference;
 

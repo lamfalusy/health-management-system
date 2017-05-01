@@ -10,7 +10,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import java.util.Date;
 
@@ -20,6 +22,8 @@ import hu.lamsoft.hms.androidclient.activity.RegisterActivity;
 import hu.lamsoft.hms.androidclient.component.session.Session;
 import hu.lamsoft.hms.androidclient.fragment.BlogEntriesFragment;
 import hu.lamsoft.hms.androidclient.fragment.FragmentManager;
+import hu.lamsoft.hms.androidclient.fragment.HistoricalDataFragment;
+import hu.lamsoft.hms.androidclient.fragment.MealsFragment;
 import hu.lamsoft.hms.androidclient.fragment.NutritionistsFragment;
 import hu.lamsoft.hms.androidclient.fragment.RegimensFragment;
 import hu.lamsoft.hms.androidclient.restapi.DisableSSLCertificateCheckUtil;
@@ -67,6 +71,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        TextView customerNameTextView = ((TextView) findViewById(R.id.nav_header_main_customer_name));
+        if(Session.instance.getAuthenticationManager().getCustomer() != null && customerNameTextView != null) {
+            customerNameTextView.setText(Session.instance.getAuthenticationManager().getCustomer().getEmail());
+            Menu menu = ((NavigationView) findViewById(R.id.nav_view)).getMenu();
+            menu.findItem(R.id.nav_login).setVisible(false);
+            menu.findItem(R.id.nav_register).setVisible(false);
+            menu.findItem(R.id.nav_historical_data).setVisible(true);
+            menu.findItem(R.id.nav_meals).setVisible(true);
+        }
+    }
+
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -79,36 +97,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-
-        // haha
-//        CustomerRegistrationVO regVO = new CustomerRegistrationVO();
-//        regVO.setEmail("android@test.and");
-//        regVO.setBirthday(new Date());
-//        regVO.setRawPassword("password");
-//        new RegistrationAsyncTask(regVO, new AsyncCallback<CustomerDTO>() {
-//            @Override
-//            public void onPostExecute(CustomerDTO customerDTO) {
-//                LoginVO loginVO = new LoginVO();
-//                loginVO.setUsername("android@test.and");
-//                loginVO.setPassword("password");
-//                new LoginAsyncTask(loginVO, new AsyncCallback<LogedInCustomerVO>(){
-//                    @Override
-//                    public void onPostExecute(LogedInCustomerVO logedInCustomerVO) {
-//                        Session.instance.getAuthenticationManager().login(logedInCustomerVO);
-//                        Log.i("MainActivity", Session.instance.getAuthenticationManager().getToken());
-//                        new CustomerAsyncTask(new AsyncCallback<CustomerDTO>() {
-//                            @Override
-//                            public void onPostExecute(CustomerDTO customerDTO) {
-//                                Log.i("MainActivity", customerDTO.toString());
-//                            }
-//                        }).execute();
-//                    }
-//                }).execute();
-//            }
-//        }).execute();
-
-
-
         int id = item.getItemId();
         if (id == R.id.nav_login) {
             addActivity(LoginActivity.class);
@@ -124,6 +112,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             addFragment(BlogEntriesFragment.class);
         } else if (id == R.id.nav_regimens) {
             addFragment(RegimensFragment.class);
+        } else if (id == R.id.nav_historical_data) {
+            addFragment(HistoricalDataFragment.class);
+        } else if (id == R.id.nav_meals) {
+            addFragment(MealsFragment.class);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

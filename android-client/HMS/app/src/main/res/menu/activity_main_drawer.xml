@@ -11,6 +11,16 @@
                 android:id="@+id/nav_register"
                 android:icon="@drawable/ic_menu_register"
                 android:title="Register" />
+            <item
+                android:id="@+id/nav_historical_data"
+                android:icon="@drawable/ic_menu_historical_data"
+                android:title="Historical data"
+                android:visible="false"/>
+            <item
+                android:id="@+id/nav_meals"
+                android:icon="@drawable/ic_menu_meal"
+                android:title="Meals"
+                android:visible="false"/>
         </menu>
     </item>
 

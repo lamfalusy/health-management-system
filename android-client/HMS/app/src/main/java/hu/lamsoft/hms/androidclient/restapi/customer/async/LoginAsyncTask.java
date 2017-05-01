@@ -34,7 +34,6 @@ public class LoginAsyncTask extends HMSAsyncTask<Object, Integer, LogedInCustome
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
             ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST, packageToHttpEntity(loginVO), String.class);
             LogedInCustomerVO ret = new LogedInCustomerVO();
-            // ret.setCustomerDTO(responseEntity.getBody());
             ret.setToken(responseEntity.getHeaders().getAuthorization().substring(7));
             return ret;
         } catch (Exception e) {

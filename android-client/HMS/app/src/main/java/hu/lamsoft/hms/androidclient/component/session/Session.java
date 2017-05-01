@@ -16,11 +16,17 @@ public class Session {
 
     private AuthenticationManager authenticationManager = new AuthenticationManager();
 
+    private CustomerData customerData = new CustomerData();
+
     private Session() {
         // Nothing to do here
     }
 
     public AuthenticationManager getAuthenticationManager() {
         return this.authenticationManager;
+    }
+
+    public CustomerData getCustomerData() {
+        return customerData;
     }
 }
